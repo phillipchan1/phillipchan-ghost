@@ -3,7 +3,6 @@ var express = require('express');
 var urlService = require('./node_modules/ghost/core/frontend/services/url');
 var parentApp = express();
 
-console.log('in server');
 // Run a single Ghost process
 ghost()
 	.then(function(ghostServer) {
