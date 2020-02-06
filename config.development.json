@@ -1,26 +1,27 @@
 {
-  "url": "http://localhost:2368/",
-  "server": {
-    "port": 2368,
-    "host": "127.0.0.1"
-  },
-  "database": {
-    "client": "sqlite3",
-    "connection": {
-      "filename": "content/data/ghost-local.db"
-    }
-  },
-  "mail": {
-    "transport": "Direct"
-  },
-  "logging": {
-    "transports": [
-      "file",
-      "stdout"
-    ]
-  },
-  "process": "local",
-  "paths": {
-    "contentPath": "content"
-  }
+	"url": "http://localhost:2368/",
+	"server": {
+		"port": 2369,
+		"host": "127.0.0.1"
+	},
+	"database": {
+		"client": "sqlite3",
+		"connection": {
+			"host": "sulnwdk5uwjw1r2k.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
+			"user": "yamu1fwr6j3a1ww7",
+			"password": "merbypvhr5f2n9g6",
+			"database": "bk275mviz3qms2n3",
+			"charset": "utf8"
+		}
+	},
+	"mail": {
+		"transport": "Direct"
+	},
+	"logging": {
+		"transports": ["file", "stdout"]
+	},
+	"process": "local",
+	"paths": {
+		"contentPath": "content"
+	}
 }
