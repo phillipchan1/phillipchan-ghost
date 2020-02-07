@@ -63,7 +63,7 @@ into the {body} of the default.hbs template --}}
           {{else}}
           {{!-- if the user does not have access, show them an upgrade CTA --}}
             <p>
-              {{ t "You don't have access to this post at the moment, but if you upgrade your account you'll be able to see the
+              {{t "You don't have access to this post at the moment, but if you upgrade your account you'll be able to see the
               whole thing, as well as all the other posts in the archive! Subscribing only takes a few seconds and will give you
               immediate access."}}
             </p>
@@ -131,21 +131,21 @@ into the {body} of the default.hbs template --}}
             <ul class="m-author__social">
               {{#if primary_author.website}}
                 <li>
-                  <a href="{{website}}" target="_blank" rel="noopener" aria-label="Website">
+                  <a href="{{primary_author.website}}" target="_blank" rel="noopener" aria-label="Website">
                     <span class="icon-web"></span>
                   </a>
                 </li>
               {{/if}}
               {{#if primary_author.facebook}}
                 <li>
-                  <a href="https://facebook.com/{{facebook}}" target="_blank" rel="noopener" aria-label="Facebook">
+                  <a href="https://facebook.com/{{primary_author.facebook}}" target="_blank" rel="noopener" aria-label="Facebook">
                     <span class="icon-facebook"></span>
                   </a>
                 </li>
               {{/if}}
               {{#if primary_author.twitter}}
                 <li>
-                  <a href="https://twitter.com/{{twitter}}" target="_blank" rel="noopener" aria-label="Twitter">
+                  <a href="https://twitter.com/{{primary_author.twitter}}" target="_blank" rel="noopener" aria-label="Twitter">
                     <span class="icon-twitter"></span>
                   </a>
                 </li>
