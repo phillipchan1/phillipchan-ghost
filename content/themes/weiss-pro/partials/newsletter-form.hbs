@@ -7,16 +7,30 @@ This template is used to display the form where users can subscribe to the newsl
     <div class="m-newsletter__form">
       <h1 class="m-newsletter__title">{{t "Subscribe to our newsletter"}}</h1>
       <p class="m-newsletter__description">
-        {{ "Get the latest posts delivered right to your inbox."}}
+        {{t "Get the latest posts delivered right to your inbox."}}
       </p>
-
-      <script type="text/javascript" src="//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js"
-        data-dojo-config="usePlainJson: true, isDebug: false"></script>
-      <script
-        type="text/javascript">window.dojoRequire(["mojo/signup-forms/Loader"], function (L) { L.start({ "baseUrl": "mc.us4.list-manage.com", "uuid": "cd22735d5c0dc119ab53e59dd", "lid": "a4bb38b91c", "uniqueMethods": true }) })</script>
-
+      <fieldset class="m-fieldset in-newsletter-form">
+        <label for="newsletter-input" class="sr-only">{{t "Your email address"}}</label>
+        <input data-members-email id="newsletter-input" class="m-input in-newsletter-form" type="email"
+          placeholder="{{t "Your email address"}}" required />
+      </fieldset>
+      <button a href="http://eepurl.com/gSC6Kj" class="m-button primary" type="submit">
+        <span>{{t "Subscribe"}}</span>
+      </button>
     </div>
-
-
+    <div class="m-newsletter__success">
+      <img src="{{asset "images/subscribe/success-illustration.svg"}}" alt="Success!"
+        class="m-newsletter__illustration">
+      <h1 class="m-newsletter__title">{{t "Awesome!"}}</h1>
+      <p class="m-newsletter__description {{#is "home"}}no-margin{{/is}}">
+        {{t "Now check your inbox and click the link to confirm your subscription."}}
+      </p>
+      {{^is "home"}}
+      <a href="{{@site.url}}" class="m-button outlined">{{t "Back to home"}}</a>
+      {{/is}}
+    </div>
+    <p class="m-newsletter__invalid m-error-message">{{t "Please enter a valid email address"}}</p>
+    <p class="m-newsletter__error m-error-message">{{t "Oops! There was an error sending the email, please try later"}}
+    </p>
   </form>
 </div>
