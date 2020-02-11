@@ -6,7 +6,6 @@ var parentApp = express();
 // Run a single Ghost process
 ghost()
 	.then(function(ghostServer) {
-		// console.log(`TCL: ghostServer`, ghostServer.config);
 		// for making subdir work
 		parentApp.use(urlService.utils.getSubdir(), ghostServer.rootApp);
 		ghostServer.start(parentApp);

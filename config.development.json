@@ -7,11 +7,7 @@
 	"database": {
 		"client": "sqlite3",
 		"connection": {
-			"host": "sulnwdk5uwjw1r2k.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
-			"user": "yamu1fwr6j3a1ww7",
-			"password": "merbypvhr5f2n9g6",
-			"database": "bk275mviz3qms2n3",
-			"charset": "utf8"
+			"filename": "content/data/ghost-local.db"
 		}
 	},
 	"mail": {
