@@ -17,6 +17,7 @@
     "ghost": "^3.2.0",
     "ghost-storage-adapter-s3": "^2.8.0",
     "ghost-storage-cloudinary": "^2.0.2",
+    "logrocket": "^1.0.12",
     "london": "github:tryghost/london#1.0.0",
     "lyra": "github:tryghost/lyra",
     "massively": "github:tryghost/massively#1.0.2",
