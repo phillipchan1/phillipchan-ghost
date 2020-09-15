@@ -26,7 +26,7 @@
     "vapor": "github:sethlilly/Vapor#v1.6.0"
   },
   "engines": {
-    "node": "12.X"
+    "node": "12.10.0"
   },
   "scripts": {
     "start": "node server.js",
