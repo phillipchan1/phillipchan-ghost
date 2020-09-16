@@ -5,6 +5,8 @@ var parentApp = express()
 const { Timber } = require('@timberio/node')
 var LogRocket = require('logrocket')
 
+require('dotenv').config()
+
 /**
  * Logrocket instance
  */
