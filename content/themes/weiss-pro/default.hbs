@@ -11,22 +11,99 @@
   <meta name="HandheldFriendly" content="True" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+  {{!-- Preload assets --}}
+  <link rel="preload" href="{{asset "css/app.css"}}" as="style" />
+  <link rel="preload" href="{{asset "js/manifest.js"}}" as="script" />
+  <link rel="preload" href="{{asset "js/vendor/content-api.min.js"}}" as="script" />
+  <link rel="preload" href="{{asset "js/vendor.js"}}" as="script" />
+  <link rel="preload" href="{{asset "js/app.js"}}" as="script" />
+  <link rel="preconnect" href="https://polyfill.io">
+  <link rel="dns-prefetch" href="https://polyfill.io">
+
+  {{!-- This #block helper will try to preload page-specific assets --}}
+  {{{block "preload"}}}
+
   {{!-- Styles'n'Scripts --}}
   <style>
-    /* This font-face is here to make icons work if the Ghost instance is installed in a subdirectory */
+    /* These font-faces are here to make fonts work if the Ghost instance is installed in a subdirectory */
+
+    /* playfair-display-700 */
+    @font-face {
+      font-family: 'Playfair Display';
+      font-style: normal;
+      font-weight: 700;
+      font-display: swap;
+      src: url("{{asset 'fonts/playfair-display/latin/playfair-display-700.eot'}}");
+      src: url("{{asset 'fonts/playfair-display/latin/playfair-display-700.eot?#iefix'}}") format('embedded-opentype'),
+          url("{{asset 'fonts/playfair-display/latin/playfair-display-700.woff2'}}") format('woff2'),
+          url("{{asset 'fonts/playfair-display/latin/playfair-display-700.woff'}}") format('woff'),
+          url("{{asset 'fonts/playfair-display/latin/playfair-display-700.ttf'}}") format('truetype'),
+          url("{{asset 'fonts/playfair-display/latin/playfair-display-700.svg#PlayfairDisplay'}}") format('svg');
+    }
+
+    /* roboto-regular */
+    @font-face {
+      font-family: 'Roboto';
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url("{{asset 'fonts/roboto/latin/roboto-regular.eot'}}");
+      src: local('Roboto'), local('Roboto-Regular'),
+          url("{{asset 'fonts/roboto/latin/roboto-regular.eot?#iefix'}}") format('embedded-opentype'),
+          url("{{asset 'fonts/roboto/latin/roboto-regular.woff2'}}") format('woff2'),
+          url("{{asset 'fonts/roboto/latin/roboto-regular.woff'}}") format('woff'),
+          url("{{asset 'fonts/roboto/latin/roboto-regular.ttf'}}") format('truetype'),
+          url("{{asset 'fonts/roboto/latin/roboto-regular.svg#Roboto'}}") format('svg');
+    }
+
+    /* roboto-500 */
+    @font-face {
+      font-family: 'Roboto';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url("{{asset 'fonts/roboto/latin/roboto-500.eot'}}");
+      src: local('Roboto Medium'), local('Roboto-Medium'),
+          url("{{asset 'fonts/roboto/latin/roboto-500.eot?#iefix'}}") format('embedded-opentype'),
+          url("{{asset 'fonts/roboto/latin/roboto-500.woff2'}}") format('woff2'),
+          url("{{asset 'fonts/roboto/latin/roboto-500.woff'}}") format('woff'),
+          url("{{asset 'fonts/roboto/latin/roboto-500.ttf'}}") format('truetype'),
+          url("{{asset 'fonts/roboto/latin/roboto-500.svg#Roboto'}}") format('svg');
+    }
+
+    /* roboto-700 */
+    @font-face {
+      font-family: 'Roboto';
+      font-style: normal;
+      font-weight: 700;
+      font-display: swap;
+      src: url("{{asset 'fonts/roboto/latin/roboto-700.eot'}}");
+      src: local('Roboto Bold'), local('Roboto-Bold'),
+          url("{{asset 'fonts/roboto/latin/roboto-700.eot?#iefix'}}") format('embedded-opentype'),
+          url("{{asset 'fonts/roboto/latin/roboto-700.woff2'}}") format('woff2'),
+          url("{{asset 'fonts/roboto/latin/roboto-700.woff'}}") format('woff'),
+          url("{{asset 'fonts/roboto/latin/roboto-700.ttf'}}") format('truetype'),
+          url("{{asset 'fonts/roboto/latin/roboto-700.svg#Roboto'}}") format('svg');
+    }
+
+    /* iconmoon */
     @font-face {
       font-family: 'icomoon';
-      src: url("{{asset 'fonts/icomoon.eot?agzxid'}}");
-      src: url("{{asset 'fonts/icomoon.eot?agzxid#iefix'}}") format('embedded-opentype'),
-      url("{{asset 'fonts/icomoon.ttf?agzxid'}}") format('truetype'),
-      url("{{asset 'fonts/icomoon.woff?agzxid'}}") format('woff'),
-      url("{{asset 'fonts/icomoon.svg?agzxid#icomoon'}}") format('svg');
+      src: url("{{asset 'fonts/icomoon/icomoon.eot?j42gb1'}}");
+      src: url("{{asset 'fonts/icomoon.eot?j42gb1#iefix'}}") format('embedded-opentype'),
+      url("{{asset 'fonts/icomoon/icomoon.ttf?j42gb1'}}") format('truetype'),
+      url("{{asset 'fonts/icomoon/icomoon.woff?j42gb1'}}") format('woff'),
+      url("{{asset 'fonts/icomoon/icomoon.svg?j42gb1#icomoon'}}") format('svg');
       font-weight: normal;
       font-style: normal;
       font-display: swap;
     }
   </style>
+
   <link rel="stylesheet" type="text/css" href="{{asset "css/app.css"}}" media="screen" />
+
+  {{!-- This #block helper will inject a stylesheet for a specific page --}}
+  {{{block "styles"}}}
 
   {{!-- This #block helper will pull data from the hero partial 
     to inject styles of the hero image to make it responsive --}}
@@ -35,41 +112,12 @@
   {{!-- This tag outputs SEO meta+structured data and other important settings --}}
   {{ghost_head}}
 
-  {{!-- This variable is used to make the search form work --}}
+  {{!-- These variables are used to make the search form work --}}
   <script>
-    const ghostHost = "{{@site.url}}"
+    const ghostHost = '{{@site.url}}'
+    const membersLabel = '{{t "members"}}'
+    const paidLabel = '{{t "paid"}}'
   </script>
-
-  {{!-- This script loads the Google font asynchronously --}}
-  <script>
-    WebFontConfig = {
-      google: { families: ['Playfair+Display:700', 'Roboto:400,500,700&display=swap'] }
-    };
-    (function (d) {
-      var wf = d.createElement('script'), s = d.scripts[0];
-      wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js';
-      wf.async = true;
-      s.parentNode.insertBefore(wf, s);
-    })(document);
-  </script>
-
-  {{!-- Mixpanel --}}
-  <script>(function (c, a) {
-      if (!a.__SV) {
-        var b = window; try { var d, m, j, k = b.location, f = k.hash; d = function (a, b) { return (m = a.match(RegExp(b + "=([^&]*)"))) ? m[1] : null }; f && d(f, "state") && (j = JSON.parse(decodeURIComponent(d(f, "state"))), "mpeditor" === j.action && (b.sessionStorage.setItem("_mpcehash", f), history.replaceState(j.desiredHash || "", c.title, k.pathname + k.search))) } catch (n) { } var l, h; window.mixpanel = a; a._i = []; a.init = function (b, d, g) {
-          function c(b, i) {
-            var a = i.split("."); 2 == a.length && (b = b[a[0]], i = a[1]); b[i] = function () {
-              b.push([i].concat(Array.prototype.slice.call(arguments,
-                0)))
-            }
-          } var e = a; "undefined" !== typeof g ? e = a[g] = [] : g = "mixpanel"; e.people = e.people || []; e.toString = function (b) { var a = "mixpanel"; "mixpanel" !== g && (a += "." + g); b || (a += " (stub)"); return a }; e.people.toString = function () { return e.toString(1) + ".people (stub)" }; l = "disable time_event track track_pageview track_links track_forms track_with_groups add_group set_group remove_group register register_once alias unregister identify name_tag set_config reset opt_in_tracking opt_out_tracking has_opted_in_tracking has_opted_out_tracking clear_opt_in_out_tracking people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user people.remove".split(" ");
-          for (h = 0; h < l.length; h++)c(e, l[h]); var f = "set set_once union unset remove delete".split(" "); e.get_group = function () { function a(c) { b[c] = function () { call2_args = arguments; call2 = [c].concat(Array.prototype.slice.call(call2_args, 0)); e.push([d, call2]) } } for (var b = {}, d = ["get_group"].concat(Array.prototype.slice.call(arguments, 0)), c = 0; c < f.length; c++)a(f[c]); return b }; a._i.push([b, d, g])
-        }; a.__SV = 1.2; b = c.createElement("script"); b.type = "text/javascript"; b.async = !0; b.src = "undefined" !== typeof MIXPANEL_CUSTOM_LIB_URL ?
-          MIXPANEL_CUSTOM_LIB_URL : "file:" === c.location.protocol && "//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//) ? "https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js" : "//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js"; d = c.getElementsByTagName("script")[0]; d.parentNode.insertBefore(b, d)
-      }
-    })(document, window.mixpanel || []);
-    mixpanel.init("bf693feb0619782a29562ba4b2d4a062", { batch_requests: true })</script>
-
 </head>
 
 <body class="{{body_class}}">
@@ -78,19 +126,20 @@
 
   {{!-- Search form --}}
   {{> search}}
-
+  
   {{!-- The footer --}}
   {{> footer}}
 
   {{!-- Notifications alerts --}}
-  {{> "notifications"}}
+  {{#if @labs.members}}
+    {{> "notifications"}}
+  {{/if}}
 
   {{!-- Common scripts shared between pages --}}
-  <script crossorigin="anonymous"
-    src="https://polyfill.io/v3/polyfill.min.js?features=IntersectionObserver%2CPromise%2CArray.prototype.includes%2CString.prototype.endsWith%2CString.prototype.startsWith%2CObject.assign%2CNodeList.prototype.forEach"></script>
+  <script crossorigin="anonymous" src="https://polyfill.io/v3/polyfill.min.js?features=IntersectionObserver%2CPromise%2CArray.prototype.includes%2CString.prototype.endsWith%2CString.prototype.startsWith%2CObject.assign%2CNodeList.prototype.forEach"></script>
   {{!--
 
-    anime.js v3.1.0
+    anime.js v3.2.0
     (c) 2019 Julian Garnier
     Released under the MIT license
     animejs.com
@@ -99,7 +148,7 @@
     The MIT License (MIT)
     Copyright (c) 2015 Michał Sajnóg
 
-    css-vars-ponyfill v2.1.2
+    css-vars-ponyfill v2.3.2
     https://jhildenbiddle.github.io/css-vars-ponyfill/
     (c) 2018-2019 John Hildenbiddle <http://hildenbiddle.com> * MIT license
 
@@ -107,37 +156,37 @@
     DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
     Copyright (C) 2015 Ross Zurowski <ross@rosszurowski.com>
 
-    Fuse.js v3.4.5 - Lightweight fuzzy-search (http://fusejs.io)
+    Fuse.js v6.3.0 - Lightweight fuzzy-search (http://fusejs.io)
     Copyright (c) 2012-2017 Kirollos Risk (http://kiro.me)
     All Rights Reserved. Apache Software License 2.0
     http://www.apache.org/licenses/LICENSE-2.0
 
-    headroom.js v0.10.3 - Give your page some headroom. Hide your header until you need it
+    headroom.js v0.11.0 - Give your page some headroom. Hide your header until you need it
     Copyright (c) 2019 Nick Williams - http://wicky.nillia.ms/headroom.js
     License: MIT
 
-    jQuery v3.4.1 | (c) JS Foundation and other contributors | jquery.org/license
+    jQuery v3.5.1 | (c) JS Foundation and other contributors | jquery.org/license
 
-    lozad.js - v1.14.0 - 2019-10-19
+    lozad.js - v1.15.0 - 2019-10-19
     https://github.com/ApoorvSaxena/lozad.js
     Copyright (c) 2019 Apoorv Saxena; Licensed MIT
 
-    medium-zoom 1.0.4 | MIT License | https://github.com/francoischalifour/medium-zoom
+    medium-zoom 1.0.6 | MIT License | https://github.com/francoischalifour/medium-zoom
 
     stickybits - Stickybits is a lightweight alternative to `position: sticky` polyfills
-    version: v3.7.0
+    version: v3.7.7
     link: https://github.com/dollarshaveclub/stickybits#readme
     author: Jeff Wainwright <yowainwright@gmail.com> (https://jeffry.in)
     license: MIT
 
-    Swiper 5.2.0
+    Swiper 6.0.4
     Most modern mobile touch slider and framework with hardware accelerated transitions
     http://swiperjs.com
     Copyright 2014-2019 Vladimir Kharlampidi
     Released under the MIT License
     Released on: October 26, 2019
 
-    tippy.js v4.0.1
+    tippy.js v6.2.4
     MIT License
     Copyright (c) 2017 atomiks
 
@@ -150,12 +199,10 @@
     Copyright (c) 2018-2019 Ghost Foundation
 
   --}}
-  <script defer src="https://unpkg.com/@tryghost/content-api@1.2.7/umd/content-api.min.js"></script>
   <script defer src="{{asset "js/manifest.js"}}"></script>
+  <script defer src="{{asset "js/vendor/content-api.min.js"}}"></script>
   <script defer src="{{asset "js/vendor.js"}}"></script>
   <script defer src="{{asset "js/app.js"}}"></script>
-  <script src="https://cdn.lr-ingest.io/LogRocket.min.js" crossorigin="anonymous"></script>
-  <script>window.LogRocket && window.LogRocket.init('jekkcv/phillipchan-ghost');</script>
 
   {{!-- The #block helper will pull in data from the #contentFor other template files --}}
   {{{block "scripts"}}}

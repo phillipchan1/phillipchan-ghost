@@ -16,7 +16,7 @@ This template contains the structure of featured articles slides.
     <div class="m-featured-slide__metas">
       <div class="m-featured-slide__authors">
         {{#foreach authors limit="3"}}
-          <a href="{{url}}" class="m-featured-slide__author author-{{@index}} js-tooltip" aria-label="Author" data-tippy-content="{{name}}">
+          <a href="{{url}}" class="m-featured-slide__author content-centered author-{{@index}} js-tooltip" aria-label="{{name}}" data-tippy-content="{{name}}">
             {{#if profile_image}}
               <div style="background-image: url({{img_url profile_image size="xs"}});"></div>
             {{else}}
@@ -27,8 +27,10 @@ This template contains the structure of featured articles slides.
       </div>
       <div class="m-featured-slide__timestamp">
         <span>{{date published_at timeago="true"}}</span>
-        <span>&nbsp; &bull; &nbsp;</span>
-        <span>{{reading_time minute=(t "1 min read") minutes=(t "% min read")}}</span>
+        {{#if reading_time}}
+          <span>&nbsp; &bull; &nbsp;</span>
+          <span>{{reading_time minute=(t "1 min read") minutes=(t "% min read")}}</span>
+        {{/if}}
       </div>
     </div>
     {{#if primary_tag}}
@@ -36,11 +38,16 @@ This template contains the structure of featured articles slides.
     {{/if}}
   </div>
   <div class="m-featured-slide__picture {{#unless feature_image}}no-image{{/unless}}">
-    <a href="{{url}}" aria-label="{{title}}">
+    <a href="{{url}}" aria-hidden="true" tabindex="-1">
       {{#if feature_image}}
-        <div style="background-image: url({{feature_image}});"></div>
+        <style>
+          #featured-slide-bg-{{id}} {
+            background-image: url({{img_url feature_image size='l'}});
+          }
+        </style>
+        <div id="featured-slide-bg-{{id}}"></div>
       {{else}}
-        <div style="background-image: url({{asset "images/empty/featured-illustration.svg"}});"></div>
+        <div class="lozad no-animation" data-background-image="{{asset "images/empty/featured-illustration.svg"}}"></div>
       {{/if}}
     </a>
   </div>

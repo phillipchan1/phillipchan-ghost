@@ -5,15 +5,15 @@ This template contains the structure of regular articles cards.
 <article class="m-post-card {{post_class}} post-access-{{visibility}} {{#unless feature_image}}no-image{{/unless}} {{#if @even}}even{{else}}odd{{/if}} {{#if @last}}last{{/if}}">
   <div class="m-post-card__image" data-aos="fade-up">
     <div class="m-post-card__image__shadow"></div>
-    <a class="m-post-card__image__link" href="{{url}}" aria-label="{{title}}">
+    <a class="m-post-card__image__link" href="{{url}}" aria-hidden="true" tabindex="-1">
       {{#if feature_image}}
-        <div class="m-post-card__image__background lozad" data-background-image="{{feature_image}}"></div>
+        <div class="m-post-card__image__background lozad" data-background-image="{{img_url feature_image size="m"}}"></div>
       {{else}}
         <div class="m-post-card__image__background lozad" data-background-image="{{asset "images/empty/post-illustration.svg"}}"></div>
       {{/if}}
       {{#if featured}}
         <div class="m-post-card__badge" title="{{t "Featured"}}">
-          <span class="icon-star"></span>
+          <span class="icon-star" aria-hidden="true"></span>
         </div>
       {{/if}}
     </a>
@@ -29,7 +29,7 @@ This template contains the structure of regular articles cards.
     <div class="m-post-card__metas">
       <div class="m-post-card__authors">
         {{#foreach authors limit="3"}}
-          <a href="{{url}}" class="m-post-card__author author-{{@index}} js-tooltip" aria-label="Author"
+          <a href="{{url}}" class="m-post-card__author content-centered author-{{@index}} js-tooltip" aria-label="{{name}}"
             data-tippy-content="{{name}}">
             {{#if profile_image}}
               <div style="background-image: url({{img_url profile_image size="xs"}});"></div>
@@ -41,8 +41,10 @@ This template contains the structure of regular articles cards.
       </div>
       <div class="m-post-card__timestamp">
         <span>{{date published_at timeago="true"}}</span>
-        <span>&nbsp; &bull; &nbsp;</span>
-        <span>{{reading_time minute=(t "1 min read") minutes=(t "% min read")}}</span>
+        {{#if reading_time}}
+          <span>&nbsp; &bull; &nbsp;</span>
+          <span>{{reading_time minute=(t "1 min read") minutes=(t "% min read")}}</span>
+        {{/if}}
       </div>
     </div>
     {{#if primary_tag}}
