@@ -204,11 +204,14 @@ into the {body} of the default.hbs template --}}
     <div class="l-comments">
       <div id="disqus_thread"></div>
       <script>
+
+
         var disqus_config = function () {
-          this.page.url = "{{url}}";
+          this.page.url = "{{url absolute="true"}}";
           this.page.identifier = "ghost-{{comment_id}}"
         };
-        (function () {
+
+        (function () { // DON'T EDIT BELOW THIS LINE
           var d = document, s = d.createElement('script');
           s.src = 'https://the-black-box.disqus.com/embed.js';
           s.setAttribute('data-timestamp', +new Date());
